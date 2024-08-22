@@ -8,9 +8,16 @@ import FIcon from 'react-native-vector-icons/FontAwesome';
 
 // import envelopeImg from '../../assets/envelope.png';
 import * as S from './styles';
+import { StackScreenProps } from '@react-navigation/stack';
+import { StackParamsList } from '../../navigations/StackNavigator';
 
-const Verification: React.FC = () => {
-  const navigation = useNavigation();
+
+type VerificationScreenProps = StackScreenProps<StackParamsList, 'Verification'>
+export type VerificationPropsList ={}
+
+
+const Verification: React.FC<VerificationScreenProps> = ({navigation, ...props}) => {
+  // const navigation = useNavigation();
   const codeRef2 = useRef(null);
   const codeRef3 = useRef(null);
   const codeRef4 = useRef(null);
@@ -43,9 +50,9 @@ const Verification: React.FC = () => {
           <CodeInput onChangeText={() => focusNext(codeRef3)} ref={codeRef2} />
           <CodeInput onChangeText={() => focusNext(codeRef4)} ref={codeRef3} />
           <CodeInput
-            returnKeyType="send"
-            onChangeText={() => navigation.navigate('UserDetails')}
-            onSubmitEditing={() => navigation.navigate('UserDetails')}
+            // returnKeyType="send"
+            onChangeText={() => navigation.navigate('DrawerNavigator')}
+            onSubmitEditing={() => navigation.navigate('DrawerNavigator')}
             ref={codeRef4}
           />
         </S.CodeContainer>

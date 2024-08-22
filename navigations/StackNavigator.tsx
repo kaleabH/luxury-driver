@@ -4,16 +4,16 @@ import { NavigationContainer, NavigatorScreenParams } from '@react-navigation/na
 import { createStackNavigator } from '@react-navigation/stack';
 
 import theme from './../theme';
-import Login from '../screens/Login';
+import Login, {LoginPropsList} from '../screens/Login';
 import Register from '../screens/Register';
-import Verification from '../screens/Verification';
+import Verification, { VerificationPropsList } from '../screens/Verification';
 import DrawerNavigator, {DrawerParamsList}  from './DrawerNavigator';
 
-type StackParamsList = {
+export type StackParamsList = {
     Home: undefined;
-    Login: undefined;
+    Login: LoginPropsList;
     Register: undefined;
-    Verification: undefined;
+    Verification: VerificationPropsList;
     DrawerNavigator: NavigatorScreenParams<DrawerParamsList>
 
 }
@@ -27,7 +27,7 @@ const StackNavigator: React.FC<StackProps> = ()=> {
     const Stack = createStackNavigator<StackParamsList>()
   return (
     <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='Login'>
             <Stack.Screen
                component={Login}
                name={"Login"}
@@ -43,7 +43,7 @@ const StackNavigator: React.FC<StackProps> = ()=> {
              />
             <Stack.Screen
                component={DrawerNavigator}
-                name={"Home"}
+                name={"DrawerNavigator"}
             />
         </Stack.Navigator>
     </NavigationContainer>

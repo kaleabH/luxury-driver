@@ -3,25 +3,22 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { TextInput, Button, Text, Card, IconButton } from 'react-native-paper';
-import { NavigationProp, useNavigation, RouteProp } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import CountryPicker, { Country, CountryCode } from 'react-native-country-picker-modal';
 import CustomButton from '../../components/Button';
 import { Image } from 'react-native';
-
-export interface LoginScreenProps {
-    navigation: NavigationProp<"Login">;
-    route: RouteProp<'Login'>:
-
-}
+import { StackScreenProps } from '@react-navigation/stack';
+import { StackParamsList } from '../../navigations/StackNavigator';
 
 
+type LoginScreenProps = StackScreenProps<StackParamsList, 'Login'>
+export type LoginPropsList ={}
 
 const Login: React.FC<LoginScreenProps> = ({navigation, route, ...props}) => {
   const [countryCode, setCountryCode] = useState<CountryCode>('ET');
   const [country, setCountry] = useState<Country | null>(null);
   const [visible, setVisible] = useState<boolean>(false);
 
-  const navigation = useNavigation();
   const handlePress = () => {
     navigation.navigate('Verification');
   };
@@ -36,7 +33,7 @@ const Login: React.FC<LoginScreenProps> = ({navigation, route, ...props}) => {
     <View style={styles.container}>
       {/* <Card.Cover source={require('../../../assets/icon2.png')} style={styles.image} /> */}
       <View style={styles.formContainer}>
-        <Image source={require('../../../assets/icon2.png')} style={styles.image} />
+        <Image source={require('../../assets/icon.png')} style={styles.image} />
         <Text style={styles.heading}>Earn Luxuryum on every trip</Text>
       </View>
         <View style={styles.row}>
@@ -57,7 +54,7 @@ const Login: React.FC<LoginScreenProps> = ({navigation, route, ...props}) => {
             <IconButton
               icon="chevron-down"
               size={24}
-              color="#B80028"
+              iconColor="#B80028"
               style={styles.arrowIcon}
             />
           </TouchableOpacity>

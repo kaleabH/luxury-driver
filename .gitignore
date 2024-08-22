@@ -33,3 +33,6 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# extra utility files
+assets/icons/rename_files.sh

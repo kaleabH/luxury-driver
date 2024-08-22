@@ -15,7 +15,7 @@ export type DrawerParamsList = {
 const DrawerNavigator: React.FC<DrawerProps> = () => {
   const Drawer = createDrawerNavigator<DrawerParamsList>()
   return (
-  <Drawer.Navigator>
+  <Drawer.Navigator screenOptions={{headerShown: false}}>
     <Drawer.Screen
        component={Home}
         name="Home"
