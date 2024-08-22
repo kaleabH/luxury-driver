@@ -3,18 +3,20 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { TextInput, Button, Text, Card, IconButton } from 'react-native-paper';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { NavigationProp, useNavigation, RouteProp } from '@react-navigation/native';
 import CountryPicker, { Country, CountryCode } from 'react-native-country-picker-modal';
 import CustomButton from '../../components/Button';
 import { Image } from 'react-native';
 
-interface LoginScreenProps {
-    navigation: NavigationProp<any>;
+export interface LoginScreenProps {
+    navigation: NavigationProp<"Login">;
+    route: RouteProp<'Login'>:
+
 }
 
 
 
-const Login: React.FC<LoginScreenProps> = () => {
+const Login: React.FC<LoginScreenProps> = ({navigation, route, ...props}) => {
   const [countryCode, setCountryCode] = useState<CountryCode>('ET');
   const [country, setCountry] = useState<Country | null>(null);
   const [visible, setVisible] = useState<boolean>(false);
