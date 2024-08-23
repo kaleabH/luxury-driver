@@ -44,12 +44,12 @@ const Widgets: React.FC<WidgetsProps> = (props) => {
 
        <View style={[styles.sideWidgets,{paddingTop: 350}]}>
                 
-                <TouchableOpacity onPress={()=>{navigator.navigate()}} style={[styles.icon, {position: 'absolute', top:30, right: 20}]}>
+                {/* <TouchableOpacity onPress={()=>{navigator.navigate()}} style={[styles.icon, {position: 'absolute', top:30, right: 20}]}>
                 <PIcon
     source={require('../assets/icons/avatar.png')}
     size={32}
   />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <TouchableOpacity style={styles.icon}>
                 <PIcon
     source={require('../assets/icons/location_red.png')}

@@ -81,9 +81,10 @@ const Home : React.FC<homeScreenProps> =() => {
     >
         <Marker coordinate={latLng} />
     </MapView>
+              
     {/* <BurgerMenu /> */}
     {/* <MapButton style={styles.locationIcon} icon={iconCenter} noMargin onPress={centerMap} /> */}
-    {/* <View style={[styles.panel, phase > 1 && styles.panelExpanded]}>
+    <View style={[styles.panel, phase > 1 && styles.panelExpanded]}>
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             {phase === 1 ? (
                 <View style={styles.inputContainerHorizontal}>
@@ -186,7 +187,7 @@ const Home : React.FC<homeScreenProps> =() => {
                 </View>
             )}
         </ScrollView>
-    </View> */}
+    </View>
 </KeyboardAvoidingView>
   )
 }
