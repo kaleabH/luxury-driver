@@ -1,7 +1,9 @@
 import React, {ReactNode, useState} from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import { FAB, Portal, PaperProvider, Button, Icon } from 'react-native-paper';
+import { FAB, Portal, PaperProvider, Button, Icon as PIcon} from 'react-native-paper';
+import Icon from './Icon'
 import theme from '../theme';
+import { useNavigation } from '@react-navigation/native';
 
 
 interface WidgetsProps{
@@ -13,6 +15,7 @@ const Widgets: React.FC<WidgetsProps> = (props) => {
     const [state, setState] = useState({ open: false });
 
     const onStateChange = ({ open }: {open: boolean}) => setState({ open });
+    const navigator = useNavigation();
   
     const { open } = state;
 
@@ -23,54 +26,51 @@ const Widgets: React.FC<WidgetsProps> = (props) => {
 
     <Portal>
         <View style={styles.container}>
-            <View style={[ styles.sideWidgets]}>
+            <View style={[ styles.sideWidgets, {paddingTop: 100}]}>
                 <TouchableOpacity style={styles.icon}>
                 <Icon
-    source="camera"
-    color={theme.color.textColor}
-    size={25}
+    source={require('../assets/icons/target_red.png')}
+    size={32}
   />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.icon}>
                 <Icon
-    source="target"
-    color={theme.color.textColor}
-    size={25}
-  />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.icon}>
-                <Icon
-    source="camera"
-    color={theme.color.textColor}
-    size={25}
+    source={require('../assets/icons/sos_red.png')}
+    size={32}
   />
                 </TouchableOpacity>
         
             </View>
 
-       <View style={[styles.sideWidgets]}>
-                <TouchableOpacity style={styles.icon}>
-                <Icon
-    source="map"
-    color={theme.color.textColor}
-    size={25}
+       <View style={[styles.sideWidgets,{paddingTop: 350}]}>
+                
+                <TouchableOpacity style={[styles.icon, {position: 'absolute', top:30, right: 20}]}>
+                <PIcon
+    source={require('../assets/icons/avatar.png')}
+    size={32}
   />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.icon}>
-                <Icon
+                <PIcon
+    source={require('../assets/icons/location_red.png')}
+    size={32}
+  />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.icon}>
+                <PIcon
     source="traffic-light"
     color={theme.color.textColor}
-    size={25}
+    size={32}
   />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.icon}>
-                <Icon
-    source="camera"
+             
+                <TouchableOpacity style={[styles.icon, {}]}>
+                <PIcon
+    source="crosshairs-gps"
     color={theme.color.textColor}
     size={25}
   />
                 </TouchableOpacity>
-        
             </View>
       </View>
 

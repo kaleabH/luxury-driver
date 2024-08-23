@@ -9,7 +9,7 @@ interface Props{
 
 const Icon:React.FC<Props> = ({source, size}) => {
   return (
-    <View style={[styles.container, {borderRadius: size, width: size, height:size, backgroundColor:'white'}]}>
+    <View style={[styles.container, {borderRadius: size, width: size, height:size,}]}>
         <Image source={source} style={{height:size, width: size, resizeMode:'contain'}}/>
     </View>
   )
@@ -17,8 +17,6 @@ const Icon:React.FC<Props> = ({source, size}) => {
 
 const styles = StyleSheet.create({
     container:{
-        elevation: 5.59,
-        shadowRadius: 5.59,
         justifyContent: "center",
         alignItems: "center",
         // borderRadius: 11,

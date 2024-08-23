@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import {createDrawerNavigator} from  "@react-navigation/drawer"
+import React, { ReactNode } from 'react'
+import {createDrawerNavigator, DrawerContentComponentProps} from  "@react-navigation/drawer"
 import Home from '../screens/Home'
+import { DrawerContent } from '../components/DrawerContent'
 
 
 type DrawerProps = {}
@@ -15,7 +16,10 @@ export type DrawerParamsList = {
 const DrawerNavigator: React.FC<DrawerProps> = () => {
   const Drawer = createDrawerNavigator<DrawerParamsList>()
   return (
-  <Drawer.Navigator screenOptions={{headerShown: false}}>
+  <Drawer.Navigator screenOptions={{headerShown: false}}
+  drawerContent={(props:DrawerContentComponentProps):ReactNode=> 
+    <DrawerContent {...props}/>}
+  >
     <Drawer.Screen
        component={Home}
         name="Home"

@@ -12,7 +12,11 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.kaleabhaliu.luxuryriderapprider",
+      "config": {
+        "googleMapsApiKey": "AIzaSyBVdYR5KOl5GHK9p-DJ1DLx5bJgc8D3rLg"
+      }
     },
     "android": {
       "adaptiveIcon": {
