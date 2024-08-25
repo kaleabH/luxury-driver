@@ -7,10 +7,10 @@ interface Props{
 
 }
 
-const Icon:React.FC<Props> = ({source, size}) => {
+const Icon:React.FC<Props> = ({source, size, ...props}) => {
   return (
     <View style={[styles.container, {borderRadius: size, width: size, height:size,}]}>
-        <Image source={source} style={{height:size, width: size, resizeMode:'contain'}}/>
+        <Image {...props} source={source} style={{borderRadius: size,height:size, width: size, resizeMode:'contain'}}/>
     </View>
   )
 }

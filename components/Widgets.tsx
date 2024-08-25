@@ -35,6 +35,7 @@ const Widgets: React.FC<WidgetsProps> = (props) => {
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.icon}>
                 <Icon
+                 
     source={require('../assets/icons/sos_red.png')}
     size={32}
   />
