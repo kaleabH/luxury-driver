@@ -19,7 +19,6 @@ const DrawerNavigator: React.FC<DrawerProps> = () => {
   const Drawer = createDrawerNavigator<DrawerParamsList>()
   return (
   <Drawer.Navigator 
-   drawerPosition="right"
   screenOptions={{  header:(props:DrawerHeaderProps):ReactNode=>(
 
     <View style={styles.menuAndLogoContainer}>
@@ -55,6 +54,7 @@ const DrawerNavigator: React.FC<DrawerProps> = () => {
       </View>)}}
   drawerContent={(props:DrawerContentComponentProps):ReactNode=> 
     <DrawerContent {...props}/>}
+  
   >
     <Drawer.Screen
        component={Home}

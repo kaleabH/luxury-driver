@@ -3,33 +3,40 @@ import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated'
+import DropdownContent from './DropdownContent'
 
 
-// const {height: SCREEN_HEIGHT } = Dimensions.get('window')
- const SCREEN_HEIGHT = 200;
+const {height: SCREEN_HEIGHT } = Dimensions.get('window')
+//  const SCREEN_HEIGHT = 200; 
 // console.log('the windows dimensions', Dimensions.get('window'))
-const MAX_TRANSLATE_Y = SCREEN_HEIGHT 
-const MIN_TRANSLATE_Y = SCREEN_HEIGHT / 2
+// const MAX_TRANSLATE_Y = SCREEN_HEIGHT 
+// const MIN_TRANSLATE_Y = SCREEN_HEIGHT / 2
 
 const TopSliderSheet = () => {
         const translateY = useSharedValue(0)
-        const context = useSharedValue({y: 0})
+        // const context = useSharedValue({y: 0})
     
         const gesture = Gesture.Pan()
         .onStart(e => {
-            context.value = {y: translateY.value}
+            // context.value = {y: translateY.value}
+            // traslateY.value = -(SCREEN_HEIGHT/)
+            console.log(e);
         })
         .onUpdate(e => {
-            translateY.value = e.translationY + context.value.y;
-            translateY.value = Math.max(translateY.value, -MAX_TRANSLATE_Y)
+            // translateY.value = e.translationY + context.value.y;
+            translateY.value = (SCREEN_HEIGHT/1.5)
+            console.log(e);
+            // translateY.value = Math.max(translateY.value, -MAX_TRANSLATE_Y)
         })
         .onEnd(e => {
-            if(translateY.value > -MIN_TRANSLATE_Y){
-                translateY.value = withSpring(SCREEN_HEIGHT)
-            }
-            if(translateY.value < -MIN_TRANSLATE_Y){
-                translateY.value = withSpring(-MAX_TRANSLATE_Y)
-            }
+            
+            console.log(e);
+            // if(translateY.value > -MIN_TRANSLATE_Y){
+                // translateY.value = withSpring(SCREEN_HEIGHT)
+            // }
+            // if(translateY.value < -MIN_TRANSLATE_Y){
+                // translateY.value = withSpring(-MAX_TRANSLATE_Y)
+            // }
         })
     
         /**
@@ -61,6 +68,7 @@ const TopSliderSheet = () => {
                 <View style={styles.childrenContainer}>
                 <Text>Bottomsheet</Text>
                 </View>
+                    <DropdownContent/>
                 <View style={styles.line} />
             </Animated.View>
         </GestureDetector>
@@ -72,13 +80,13 @@ const TopSliderSheet = () => {
             width: '100%',
             height: SCREEN_HEIGHT,
             flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent:'space-between',
+            alignItems: 'flex-end',
+            justifyContent:'center',
             backgroundColor: "#ffffff",
-            opacity:0.5,
+            opacity:0.75,
             position: 'absolute',
-            // top: 20,
-            top: SCREEN_HEIGHT / 0.75,
+            top: -(SCREEN_HEIGHT/0.87),
+            // top: SCREEN_HEIGHT / 0.75,
             zIndex: 12000,
             borderRadius: 25,
             paddingHorizontal: 10,
