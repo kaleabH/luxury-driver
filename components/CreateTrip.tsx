@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, GestureResponderEvent, TextInput } from 'react-native'
+import { StyleSheet, Text, View, Image, GestureResponderEvent, TextInput, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Color, FontFamily, FontSize, Border, Padding } from "../GlobalStyles";
 import Icon from './Icon';
@@ -24,32 +24,15 @@ const CreateTrip: React.FC<CreateTripProps> = ({closeModal}) => {
     >
       <View style={styles.searchGroup}>
         <View style={[styles.search2, styles.searchBorder]}>
-          <Image
-            style={styles.circumsearchIcon1}
-            resizeMode="cover"
-            source={require("../assets/icons/circumsearch3.png")}
-          />
+      
           <TextInput style={[styles.search3, styles.search3Position]} placeholder='Start'/>
-          <Image
-            style={[styles.rivetIconsfilter1, styles.search3Position]}
-            resizeMode="cover"
-            source={require("../assets/icons/riveticonsfilter3.png")}
-          />
+     
         </View>
         <View style={[styles.search4, styles.searchBorder]}>
      
           <TextInput style={[styles.search3, styles.search3Position]} placeholder='Destination'/>
-          <Image
-            style={[styles.rivetIconsfilter1, styles.search3Position]}
-            resizeMode="cover"
-            source={require("../assets/icons/riveticonsfilter4.png")}
-          />
+       
         </View>
-        <Image
-          style={[styles.groupItem, styles.onlinePosition]}
-          resizeMode="cover"
-          source={require("../assets/icons/group-1861.png")}
-        />
  
       </View>
       <View style={[styles.parent, styles.parentShadowBox]}>
@@ -57,11 +40,11 @@ const CreateTrip: React.FC<CreateTripProps> = ({closeModal}) => {
         {/* <TextInput/> */}
         <TextInput style={[styles.text1, styles.textTypo]} placeholder='987 65 43' />
       </View>
-      <View style={[styles.containervariant12, styles.parentShadowBox]}>
+      <TouchableOpacity style={[styles.containervariant12, styles.parentShadowBox]}>
         <Text style={[styles.createTrip, styles.onlineTypo]}>
           CREATE TRIP
         </Text>
-      </View>
+      </TouchableOpacity>
     </View>
   </View>
   )

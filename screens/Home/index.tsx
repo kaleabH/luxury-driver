@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import React,{useState} from 'react'
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import withWidgets from '../../components/withWidgets';
 import TopSliderSheet from '../../components/TopSliderSheet';
+import marker from '../../assets/icons/marker.png';
 interface ILatLng {
     latitude: number;
     longitude: number;
@@ -30,7 +31,8 @@ const Home = () => {
                     longitudeDelta: 0.0421,
                 }}
             >
-                <Marker coordinate={latLng} />
+                <Marker style={{height:5, }} coordinate={latLng} image={marker}/>
+
             </MapView>
 </View>
 )
