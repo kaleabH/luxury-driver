@@ -14,21 +14,25 @@ const {height: SCREEN_HEIGHT } = Dimensions.get('window')
 
 const TopSliderSheet = () => {
         const translateY = useSharedValue(0)
-        // const context = useSharedValue({y: 0})
+        const context = useSharedValue({y: 0})
     
         const gesture = Gesture.Pan()
         .onStart(e => {
             // context.value = {y: translateY.value}
-            // traslateY.value = -(SCREEN_HEIGHT/)
+            // translateY.value = -(SCREEN_HEIGHT/0.85)
+            // translateY.value =  -(SCREEN_HEIGHT/1.5)
+            translateY.value = e.y;
             console.log(e);
         })
         .onUpdate(e => {
             // translateY.value = e.translationY + context.value.y;
-            translateY.value = (SCREEN_HEIGHT/1.5)
+            translateY.value = e.translationY ;
+            // translateY.value = (SCREEN_HEIGHT/1.5)
             console.log(e);
             // translateY.value = Math.max(translateY.value, -MAX_TRANSLATE_Y)
         })
         .onEnd(e => {
+            translateY.value = e.translationY ;
             
             console.log(e);
             // if(translateY.value > -MIN_TRANSLATE_Y){
@@ -54,7 +58,8 @@ const TopSliderSheet = () => {
          */
         const scrollTo = ( destination: number ) => {
             'worklet'
-            translateY.value = withSpring(destination, {damping: 50})
+            // translateY.value = withSpring(destination,{damping: 50})
+            translateY.value = withSpring(destination)
         }
     
         useEffect(() => {
@@ -85,7 +90,9 @@ const TopSliderSheet = () => {
             backgroundColor: "#ffffff",
             opacity:0.75,
             position: 'absolute',
-            top: -(SCREEN_HEIGHT/0.87),
+            top: -(SCREEN_HEIGHT/0.85),
+            // top: translate
+            // top: SCREEN_HEIGHT,
             // top: SCREEN_HEIGHT / 0.75,
             zIndex: 12000,
             borderRadius: 25,
@@ -97,7 +104,7 @@ const TopSliderSheet = () => {
             backgroundColor: 'grey',
             // opacity:0,
             borderRadius: 20,
-            alignSelf: 'center',
+            alignSelf: 'flex-end',
             marginVertical: 10,
         },
         childrenContainer:{
