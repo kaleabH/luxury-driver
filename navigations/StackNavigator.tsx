@@ -4,14 +4,14 @@ import { NavigationContainer, NavigatorScreenParams } from '@react-navigation/na
 import { createStackNavigator } from '@react-navigation/stack';
 
 import theme from './../theme';
-import Login from '../screens/Login';
+import Login, { LoginScreenProps } from '../screens/Login';
 import Register from '../screens/Register';
 import Verification from '../screens/Verification';
 import DrawerNavigator, {DrawerParamsList}  from './DrawerNavigator';
 
 export type StackParamsList = {
     // Home: undefined;
-    Login: undefined;
+    Login: LoginScreenProps;
     Register: undefined;
     Verification: undefined;
     DrawerNavigator: NavigatorScreenParams<DrawerParamsList>

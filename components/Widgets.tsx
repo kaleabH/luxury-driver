@@ -6,14 +6,48 @@ import theme from '../theme';
 import { useNavigation } from '@react-navigation/native';
 import CreateTrip from './CreateTrip';
 import TouchableIcon from './TouchableIcon';
+import MapView from 'react-native-maps';
 
-
-interface WidgetsProps{
-    children?: ReactNode
+interface ILatLng {
+  latitude: number;
+  longitude: number;
 }
 
 
+export interface ChildrenParams{
+  handleCenterMap(mapRef: MapView| null, latLng: ILatLng): void;
+  latLng: ILatLng;
+  setLatLng: React.Dispatch<React.SetStateAction<ILatLng>>;
+  mapRef:MapView|null,
+  setMapRef: React.Dispatch<React.SetStateAction<MapView|null>>
+}
+
+
+interface WidgetsProps{
+    children(Props:ChildrenParams): ReactNode
+}
+
+
+
 const Widgets: React.FC<WidgetsProps> = (props) => {
+  // let mapRef: MapView | null = null;
+  const [mapRef, setMapRef] =useState<MapView| null>(null);
+
+  const [latLng, setLatLng] = useState<ILatLng>({
+        latitude: 8.9831,
+        longitude: 38.8101,
+    });
+  function centerMap(mapRef: MapView|null, latLng : ILatLng): void {
+    mapRef?.animateToRegion(
+      {
+        ...latLng,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      },
+      1000,
+    );
+  }
+ 
   const [visible, setVisible] = React.useState(false);
 
   const showModal = () => setVisible(true);
@@ -78,12 +112,13 @@ const Widgets: React.FC<WidgetsProps> = (props) => {
         visible
         color={theme.color.textColor}
         
+        
         icon={open ? 'close' : 'menu'}
         actions={[
             //   { icon: 'plus', onPress: () => console.log('Pressed add') },
             {
                 icon: 'star',
-                style:styles.fabItems,
+                style:[styles.fabItems, {transform: [{translateX: 70},{translateY: 220}]}],
                 
                 // label: 'Star',
                 color:theme.color.textColor,
@@ -91,28 +126,28 @@ const Widgets: React.FC<WidgetsProps> = (props) => {
             },
             {
                 icon: 'email',
-                style:styles.fabItems,
+                style:[styles.fabItems, {transform: [{translateX:80},{translateY: 220}]}],
                 // label: 'Email',
                 color:theme.color.textColor,
                 onPress: () => console.log('Pressed email'),
             },
             {
                 icon: 'bell',
-                style:styles.fabItems,
+                style: [styles.fabItems, {transform: [{translateY:70}]}],
                 color:theme.color.textColor,
             // label: 'Remind',
             onPress: () => console.log('Pressed notifications'),
           },
             {
                 icon: 'email',
-                style:styles.fabItems,
+                style:[styles.fabItems, {transform: [{translateX: -70}, {translateY:30}]}],
                 // label: 'Email',
                 color:theme.color.textColor,
                 onPress: () => console.log('Pressed email'),
             },
             {
                 icon: 'bell',
-                style:styles.fabItems,
+                style:[styles.fabItems, {transform: [{translateX: -80}, {translateY:30}]}],
                 color:theme.color.textColor,
             // label: 'Remind',
             onPress: () => console.log('Pressed notifications'),
@@ -130,7 +165,7 @@ const Widgets: React.FC<WidgetsProps> = (props) => {
     </Portal>
     <View style={styles.screenContainer}>
     {
-        props.children
+        props.children({handleCenterMap: centerMap, latLng, setLatLng, mapRef, setMapRef:setMapRef})
         }
     </View>
   </PaperProvider>
@@ -150,7 +185,7 @@ const styles = StyleSheet.create({
       },
       fabContainer:{
         flex:1,
-        opacity: 0.9,
+        // opacity: 0.95,
         flexDirection:'row',
         width:'100%',
         justifyContent:"center",
@@ -183,6 +218,7 @@ const styles = StyleSheet.create({
          alignSelf: 'center',
          alignItems: "baseline",
          justifyContent: "center",
+        //  backgroundColor: 'blue',
          zIndex: -1000,
          flexDirection: "column"
     },
@@ -191,9 +227,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
-        transform:[{scale:1.3}],
-        width: 48,
-        height: 48,
+        transform:[{scale:1.3}, {translateY:-30}],
+        width: 58,
+        height: 58,
         borderRadius: 48,
         // zIndex: -1000,
     },
@@ -215,6 +251,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
+        // transform:[{translateY: 10}],
+        
         width: 48,
         height: 48,
         borderRadius: 48,

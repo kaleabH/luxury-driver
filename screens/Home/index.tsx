@@ -3,24 +3,49 @@ import React,{useState} from 'react'
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import withWidgets from '../../components/withWidgets';
 import TopSliderSheet from '../../components/TopSliderSheet';
-import marker from '../../assets/icons/marker.png';
-interface ILatLng {
+import { DrawerScreenProps } from '@react-navigation/drawer';
+import { DrawerParamsList } from '../../navigations/DrawerNavigator';
+export interface ILatLng {
     latitude: number;
     longitude: number;
 }
+export interface HomeScreenParams{
 
-const Home = () => {
-    let mapRef: MapView | null = null;
-    const [latLng, setLatLng] = useState<ILatLng>({
-        latitude: 8.9831,
-        longitude: 38.8101,
-    });
+}
+interface HomeScreenProps extends DrawerScreenProps<DrawerParamsList,'Home'> {
+    latLng: ILatLng;
+    setLatLng: React.Dispatch<React.SetStateAction<ILatLng>>;
+    onCenterMap(mapRef: MapView| null, latLng: ILatLng): void;
+    mapRef: MapView | null;
+    setMapRef: React.Dispatch<React.SetStateAction<MapView|null>>    // [key:string]: any
+}
+
+const Home: React.FC< HomeScreenProps> = (props) => {
+    const {latLng, setLatLng, onCenterMap, mapRef, setMapRef} = props;
+
+
+    // function centerMap() {
+    //     mapRef?.animateToRegion(
+    //       {
+    //         ...latLng,
+    //         latitudeDelta: 0.0922,
+    //         longitudeDelta: 0.0421,
+    //       },
+    //       1000,
+    //     );
+    //   }
+
+    // let mapRef: MapView | null = null;
+    // const [latLng, setLatLng] = useState<ILatLng>({
+    //     latitude: 8.9831,
+    //     longitude: 38.8101,
+    // });
     return (
         <View style={styles.container}>
         <TopSliderSheet/>
     <MapView
             ref={map => {
-                mapRef = map;
+                setMapRef(map);
               }}
                 style={styles.map}
                 provider={PROVIDER_GOOGLE}
@@ -31,7 +56,7 @@ const Home = () => {
                     longitudeDelta: 0.0421,
                 }}
             >
-                <Marker style={{height:5, }} coordinate={latLng} image={marker}/>
+                <Marker style={{justifyContent: 'center', alignItems: 'center', width: 20, height: 20, transform:[{scale:0.5}]}} coordinate={latLng} image={require('../../assets/icons/marker.png')}/>
 
             </MapView>
 </View>
@@ -44,7 +69,8 @@ container:{
     flexDirection:'row',
     width: '100%',
     justifyContent:'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    zIndex: 5000,
 },
 map: {
     // flex: 8,

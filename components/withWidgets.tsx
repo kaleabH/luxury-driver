@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React, { ReactElement, useState } from 'react'
 import Icon from './Icon'
-import Widgets from './Widgets';
+import Widgets, { ChildrenParams } from './Widgets';
 
 
 const size = 70;
@@ -12,9 +12,15 @@ const withWidgets = (WrappedScreen: React.ElementType) => {
 
 
         <Widgets>
-        <WrappedScreen/>
+          {
+            ({handleCenterMap, latLng, setLatLng, mapRef, setMapRef}:ChildrenParams)=>(
+              
+              <WrappedScreen onCenterMap={handleCenterMap} latLng={latLng} setLatLng={setLatLng} mapRef={mapRef} setMapRef={setMapRef}/>
+            )
+          }
         {/* <Icon source={require('../assets/icons/menu_red.png')} size={size}/> */}
         </Widgets>
+
 
 
   )
