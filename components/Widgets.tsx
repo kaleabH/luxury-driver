@@ -67,19 +67,27 @@ const Widgets: React.FC<WidgetsProps> = (props) => {
           <CreateTrip closeModal={hideModal}/>
         </Modal>
         <View style={styles.container}>
-            <View style={[ styles.sideWidgets, {paddingTop: 100}]}>
+     
 
-                <TouchableIcon 
-                  source={require('../assets/icons/target_red.png')}
-                  onPress={showModal}
-                  size={32}/>
+            <View style={styles.screenContainer}>
+    {
+        props.children({handleCenterMap: centerMap, latLng, setLatLng, mapRef, setMapRef:setMapRef})
+        }
+    </View>
+    <View>
+        <View style={[ styles.leftWidgets]}>
 
-                <TouchableIcon 
-                style={styles.icon}source={require('../assets/icons/sos_red.png')}
-                size={32}/>
-            </View>
+<TouchableIcon 
+  source={require('../assets/icons/target_red.png')}
+  onPress={showModal}
+  size={32}/>
 
-       <View style={[styles.sideWidgets,{paddingTop: 350}]}>
+<TouchableIcon 
+style={styles.icon}source={require('../assets/icons/sos_red.png')}
+size={32}/>
+        </View>
+
+       <View style={[styles.rightWidgets]}>
                 
                 <TouchableIcon>
                 <PIcon 
@@ -102,9 +110,10 @@ const Widgets: React.FC<WidgetsProps> = (props) => {
                 size={25}/>
                 </TouchableIcon>
 
-            </View>
+        </View>
+    </View>
       </View>
-
+    
       <FAB.Group
         open={open}
         style={styles.fabContainer}
@@ -162,12 +171,8 @@ const Widgets: React.FC<WidgetsProps> = (props) => {
       />
     
       
+    
     </Portal>
-    <View style={styles.screenContainer}>
-    {
-        props.children({handleCenterMap: centerMap, latLng, setLatLng, mapRef, setMapRef:setMapRef})
-        }
-    </View>
   </PaperProvider>
   )
 }
@@ -184,17 +189,44 @@ const styles = StyleSheet.create({
         // backgroundColor:'green'
       },
       fabContainer:{
-        flex:1,
+        // flex:1,
         // opacity: 0.95,
+
         flexDirection:'row',
-        width:'100%',
+        // width:'100%',
         justifyContent:"center",
         alignItems:"flex-end",
         alignSelf: 'center',
-        zIndex:-1000
+        // backgroundColor: 'green',
+        // zIndex:-1000
 
         // backgroundColor:'green'
     },
+    leftWidgets:{
+       overflow:'visible',
+       position: 'absolute',
+       alignSelf: 'center',
+       top: '50%',
+       left: '5%',
+       alignItems: "baseline",
+       justifyContent: "space-between",
+       backgroundColor: 'blue',
+       padding:'0%',
+      //  zIndex: -1000,
+       flexDirection: "column"
+  },
+    rightWidgets:{
+       overflow:'visible',
+       position: 'absolute',
+       alignSelf: 'center',
+       top: '50%',
+       left: '84%',
+       alignItems: "baseline",
+       justifyContent: "space-between",
+       backgroundColor: 'blue',
+      //  zIndex: -1000,
+       flexDirection: "column"
+  },
     bottomContainer:{
         flex:1,
         flexDirection:'row',
@@ -212,16 +244,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
         
     },
-    sideWidgets:{
-        paddingHorizontal:10,
-         height: '100%',
-         alignSelf: 'center',
-         alignItems: "baseline",
-         justifyContent: "center",
-        //  backgroundColor: 'blue',
-         zIndex: -1000,
-         flexDirection: "column"
-    },
+   
     fab:{
         backgroundColor: 'white',
         justifyContent: 'center',
@@ -234,12 +257,14 @@ const styles = StyleSheet.create({
         // zIndex: -1000,
     },
     icon:{
+        position: 'absolute',
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
-        alignSelf: 'center',
+        // alignSelf: 'center',
         elevation: 6.59,
         shadowRadius: 6.59,
+        overflow:'visible',
         // transform:[{scale:1.3}],
         width: 48,
         height: 48,

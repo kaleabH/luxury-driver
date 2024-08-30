@@ -56,7 +56,7 @@ const Home: React.FC< HomeScreenProps> = (props) => {
                     longitudeDelta: 0.0421,
                 }}
             >
-                <Marker style={{justifyContent: 'center', alignItems: 'center', width: 20, height: 20, transform:[{scale:0.5}]}} coordinate={latLng} image={require('../../assets/icons/marker.png')}/>
+                <Marker coordinate={latLng} image={require('../../assets/icons/marker.png')} />
 
             </MapView>
 </View>
