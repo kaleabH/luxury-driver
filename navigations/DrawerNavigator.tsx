@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React, { ReactNode } from 'react'
 import {createDrawerNavigator, DrawerContentComponentProps,DrawerHeaderProps} from  "@react-navigation/drawer"
-import Home from '../screens/Home'
+import Home, { HomeScreenParams } from '../screens/Home'
 import { DrawerContent } from '../components/DrawerContent'
 import EIcon from 'react-native-vector-icons/Entypo';
 import Icon from '../components/Icon'
@@ -9,8 +9,7 @@ import Icon from '../components/Icon'
 
 type DrawerProps = {}
 export type DrawerParamsList = {
-  Home: undefined;
-  Profile: undefined
+  Home: HomeScreenParams;
   Earnings: undefined
   
 }
@@ -19,7 +18,6 @@ const DrawerNavigator: React.FC<DrawerProps> = () => {
   const Drawer = createDrawerNavigator<DrawerParamsList>()
   return (
   <Drawer.Navigator 
-   drawerPosition="right"
   screenOptions={{  header:(props:DrawerHeaderProps):ReactNode=>(
 
     <View style={styles.menuAndLogoContainer}>
@@ -55,6 +53,7 @@ const DrawerNavigator: React.FC<DrawerProps> = () => {
       </View>)}}
   drawerContent={(props:DrawerContentComponentProps):ReactNode=> 
     <DrawerContent {...props}/>}
+  
   >
     <Drawer.Screen
        component={Home}

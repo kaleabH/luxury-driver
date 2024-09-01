@@ -11,10 +11,11 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { StackParamsList } from '../../navigations/StackNavigator';
 
 
-type LoginScreenProps = StackScreenProps<StackParamsList, 'Login'>
-export type LoginPropsList ={}
+export interface LoginScreenProps{
+  
+}
 
-const Login: React.FC<LoginScreenProps> = ({navigation, route, ...props}) => {
+const Login: React.FC<StackScreenProps<StackParamsList, 'Login'>> = ({navigation, route, ...props}) => {
   const [countryCode, setCountryCode] = useState<CountryCode>('ET');
   const [country, setCountry] = useState<Country | null>(null);
   const [visible, setVisible] = useState<boolean>(false);
