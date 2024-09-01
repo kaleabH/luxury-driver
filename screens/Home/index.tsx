@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
 import React,{useState} from 'react'
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import withWidgets from '../../components/withWidgets';
@@ -19,6 +19,8 @@ interface HomeScreenProps extends DrawerScreenProps<DrawerParamsList,'Home'> {
     mapRef: MapView | null;
     setMapRef: React.Dispatch<React.SetStateAction<MapView|null>>    // [key:string]: any
 }
+
+const { width, height } = Dimensions.get("window");
 
 const Home: React.FC< HomeScreenProps> = (props) => {
     const {latLng, setLatLng, onCenterMap, mapRef, setMapRef} = props;
@@ -42,7 +44,7 @@ const Home: React.FC< HomeScreenProps> = (props) => {
     // });
     return (
         <View style={styles.container}>
-        <TopSliderSheet/>
+        {/* <TopSliderSheet/> */}
     <MapView
             ref={map => {
                 setMapRef(map);
@@ -75,8 +77,8 @@ container:{
 map: {
     // flex: 8,
     // marginTop:150
-    width: "100%",
-    height: "100%",
+    width,
+    height
 },
 })
 
