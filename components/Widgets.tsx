@@ -63,15 +63,11 @@ const Widgets: React.FC<WidgetsProps> = (props) => {
     <PaperProvider>
 
     <Portal>
-        <View style={styles.container}>
                 <Modal visible={visible} onDismiss={hideModal} style={styles.modal}>
           <CreateTrip closeModal={hideModal}/>
                 </Modal>
-                <View style={styles.screenContainer}>
-                 {
-                props.children({handleCenterMap: centerMap, latLng, setLatLng, mapRef, setMapRef:setMapRef})
-                }
-                </View>
+                <View style={styles.container}>
+               
                 <View style={[ styles.leftWidgets]}>
 
 <TouchableIcon 
@@ -106,6 +102,11 @@ size={32}/>
                 size={25}/>
                 </TouchableIcon>
 
+                </View>
+                <View style={styles.screenContainer}>
+                 {
+                props.children({handleCenterMap: centerMap, latLng, setLatLng, mapRef, setMapRef:setMapRef})
+                }
                 </View>
                  <FAB.Group
                    open={open}
@@ -174,16 +175,12 @@ size={32}/>
 
 const styles = StyleSheet.create({
     container:{
-        flex:1,
-        flexDirection:'row',
         position: 'absolute',
-        // transform: [{scale: 0.5}],
-        // width:'100%',
-        // justifyContent:"space-between",
-        // alignItems:"flex-end",
-        // zIndex:-1000
+        width: '100%',
+        height: '100%',
+        zIndex: -1,
+        // transform:[{scale: 0.5}]
         
-        // backgroundColor:'green'
       },
       fabContainer:{
         // flex:1,
@@ -194,61 +191,37 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         alignItems:"flex-end",
         alignSelf: 'center',
+        position: 'absolute',
+        // paddingBottom: '10%',
+        zIndex: 3
         // backgroundColor: 'green',
         // zIndex:-1000
 
         // backgroundColor:'green'
-    },
-    leftWidgets:{
-      //  overflow:'visible',
-      //  position: 'absolute',
-      //  alignSelf: 'center',
-       top: '40%',
-       left: '10%',
-      //  alignItems: "baseline",
-      //  justifyContent: "space-between",
-       backgroundColor: 'blue',
-       width: 0,
-       marginRight:10,
-       position: 'absolute',
-       zIndex: 2
-
-      // //  padding:'0%',
-      // //  zIndex: -1000,
-      //  flexDirection: "column"
+      },
+      leftWidgets:{
+        position: 'absolute',
+        top: '45%',
+        left: '8%',
+        width: 0,
+        zIndex: 3,
+        // backgroundColor:'green'
   },
     rightWidgets:{
-      //  overflow:'visible',
-      //  position: 'absolute',
-      //  alignSelf: 'center',
-      top: '40%',
-      left: '90%',
-      //  alignItems: "baseline",
-      //  justifyContent: "space-between",
-       backgroundColor: 'purple',
-       width: 0,
-       position: 'absolute', 
-       zIndex: 2,
-      // //  zIndex: -1000,
-      //  flexDirection: "column"
+      position: 'absolute',
+      top: '45%',
+      right: '8%',
+      width: 0,
+      zIndex: 3
+   
   },
     bottomContainer:{
-        flex:1,
-        flexDirection:'row',
-        width:'100%',
-        justifyContent:"center",
-        alignItems:"center",
-        borderColor: 'black',
-        borderWidth: 3
-
-        // backgroundColor:'green'
+      
     },
     screenContainer:{
-        flex: 1,
-        width: '100%',
-        alignSelf:'center',
-        position:'absolute',
-        zIndex: 3
+      position: "absolute",
+      width: '100%',
+      height: '100%'
 
     },
    
@@ -256,11 +229,11 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
-        alignSelf: 'center',
         transform:[{scale:1.3}, {translateY:-30}],
         width: 58,
         height: 58,
         borderRadius: 48,
+    
         zIndex: 2
         // zIndex: -1000,
     },
@@ -277,7 +250,8 @@ const styles = StyleSheet.create({
         width: 48,
         height: 48,
         borderRadius: 48,
-        marginVertical:20
+        zIndex:3,
+        // marginVertical:20
     },
     fabItems:{
         
@@ -291,13 +265,16 @@ const styles = StyleSheet.create({
         borderRadius: 48,
     },
     modal:{
-      // flex: 1,
+      // flex: 4,
       // zIndex:1000,
-      justifyContent: 'center',
-      alignItems: 'center',
-      alignSelf:'center',
-      position:'absolute',
-      zIndex:3
+      // justifyContent: 'center',
+      // alignItems: 'center',
+      position: "absolute",
+      width: '100%',
+      height: '100%',
+      zIndex: 2
+ 
+     
     }
 })
 
