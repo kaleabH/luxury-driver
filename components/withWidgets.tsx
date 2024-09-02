@@ -10,12 +10,11 @@ const withWidgets = (WrappedScreen: React.ElementType) => {
 
   return ()=> (
 
-
         <Widgets>
           {
-            ({handleCenterMap, latLng, setLatLng, mapRef, setMapRef}:ChildrenParams)=>(
+            ({handleCenterMap, latLng, setLatLng, mapRef}:ChildrenParams)=>(
               
-              <WrappedScreen onCenterMap={handleCenterMap} latLng={latLng} setLatLng={setLatLng} mapRef={mapRef} setMapRef={setMapRef}/>
+              <WrappedScreen onCenterMap={handleCenterMap} latLng={latLng} setLatLng={setLatLng} mapRef={mapRef}/>
             )
           }
         {/* <Icon source={require('../assets/icons/menu_red.png')} size={size}/> */}
