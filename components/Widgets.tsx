@@ -31,9 +31,9 @@ interface WidgetsProps{
 
 const { width, height } = Dimensions.get("window");
 const Widgets: React.FC<WidgetsProps> = (props) => {
-  // let mapRef: MapView | null = null;
+  let mapRef: MapView | null = null;
   // const [mapRef, setMapRef] =useState<MapView| null>(null);
-  const mapRef = React.createRef<MapView|null>()
+  // const mapRef = React.createRef<MapView|null>()
 
   const ChildrenProp =   React.forwardRef((props: WidgetsProps, mapRef: React.ForwardedRef<MapView | null>)=>{
     return  props.children({handleCenterMap: centerMap, latLng, setLatLng, mapRef})

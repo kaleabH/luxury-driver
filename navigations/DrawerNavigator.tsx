@@ -22,6 +22,7 @@ const DrawerNavigator: React.FC<DrawerProps> = () => {
 
     <View style={styles.menuAndLogoContainer}>
       <View style={styles.headerContainer}>
+
             <TouchableOpacity
               style={{zIndex:1, backgroundColor: "white",width:40, height:40, alignItems:"center", justifyContent:"center", borderRadius:20 }}
               onPress={() => {

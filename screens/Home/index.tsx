@@ -46,7 +46,7 @@ const Home: React.FC< HomeScreenProps> = (props) => {
     });
     return (
         <KeyboardAvoidingView style={styles.container}>
-        {/* <TopSliderSheet/> */}
+        <TopSliderSheet/>
     <MapView
             ref={mapRef}
                 style={styles.map}

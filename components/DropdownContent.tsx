@@ -3,42 +3,8 @@ import React from 'react'
 import { FontFamily, FontSize, Padding, Color, Border } from "../GlobalStyles";
 const DropdownContent = () => {
   return (
-    <View style={{transform:[{scale: 0.5}]}}>
-      <View style={styles.containervariant9}>
-        <View style={styles.containervariant9Child} />
-        <View style={styles.groupParent}>
-          <View style={[styles.searchParent, styles.groupChildPosition]}>
-            <View style={styles.search}>
-              <Image
-                style={styles.circumsearchIcon}
-                resizeMode="cover"
-                source={require("../assets/icons/circumsearch5.png")}
-              />
-              <Text style={[styles.search1, styles.search1Typo]}>
-                Where to ....
-              </Text>
-              <Image
-                style={[styles.rivetIconsfilter, styles.search1Position]}
-                resizeMode="cover"
-                source={require("../assets/icons/riveticonsfilter5.png")}
-              />
-            </View>
-            <Image
-              style={[styles.groupChild, styles.groupChildPosition]}
-              resizeMode="cover"
-              source={require("../assets/icons/group-18564.png")}
-            />
-          </View>
-          <View style={styles.containerParent}>
-            <View style={styles.container} />
-            <Image
-              style={[styles.windows12Traced, styles.windows12TracedLayout]}
-              resizeMode="cover"
-              source={require("../assets/icons/windows-12-traced3.png")}
-            />
-          </View>
-        </View>
-      </View>
+    <View style={styles.container}>
+   
     
       <View style={[styles.containerGroup, styles.frameParentFlexBox]}>
         <View style={styles.container1}>
@@ -94,8 +60,8 @@ const DropdownContent = () => {
             ]}
           >
             <Text style={[styles.birrday1, styles.birrdayTypo]}>
-              {" "}
-              ETB 38.39
+              {/* {" "} */}
+              ETB   38.39
             </Text>
           </View>
         </View>
@@ -144,13 +110,14 @@ const styles = StyleSheet.create({
       position: "absolute",
     },
     frameParentFlexBox: {
-      paddingVertical: Padding.p_sm,
-      paddingHorizontal: Padding.p_mini,
+      // paddingVertical: Padding.p_sm,
+      // paddingHorizontal: Padding.p_mini,
       backgroundColor: Color.colorWhitesmoke,
+      // backgroundColor: 'green',
       flexDirection: "row",
       justifyContent: "center",
       alignItems: "center",
-      position: "absolute",
+      // position: "absolute",
     },
     textTypo: {
       marginTop: 7,
@@ -166,13 +133,13 @@ const styles = StyleSheet.create({
     },
     containervariantShadowBox: {
       marginTop: 10,
-      paddingVertical: 5,
+      // paddingVertical: 5,
       backgroundColor: Color.colorFirebrick,
       borderRadius: 5,
       elevation: 2.31,
       shadowRadius: 2.31,
       height: 28,
-      paddingHorizontal: 23,
+      // paddingHorizontal: 23,
       flexDirection: "row",
       justifyContent: "center",
       alignItems: "center",
@@ -220,8 +187,7 @@ const styles = StyleSheet.create({
       top: 712,
     },
     drawerMenuIcon: {
-      top: 800,
-      left: 172,
+      
       width: 83,
       height: 83,
       position: "absolute",
@@ -292,25 +258,6 @@ const styles = StyleSheet.create({
       display: "none",
       left: 0,
     },
-    container: {
-      justifyContent: "center",
-      width: 57,
-      height: 57,
-      backgroundColor: Color.colorWhite,
-      top: 0,
-      alignItems: "center",
-      borderRadius: 11,
-      shadowOpacity: 1,
-      elevation: 5.61,
-      shadowRadius: 5.61,
-      shadowOffset: {
-        width: 5.60899543762207,
-        height: 4.487196445465088,
-      },
-      shadowColor: "rgba(0, 0, 0, 0.15)",
-      left: 0,
-      position: "absolute",
-    },
     windows12Traced: {
       height: "50.88%",
       width: "50.88%",
@@ -332,15 +279,22 @@ const styles = StyleSheet.create({
       height: 0,
       marginTop: 25,
     },
-    containervariant9: {
-      top: -344,
-      left: 2,
-      backgroundColor: Color.colorGray_200,
-      width: 425,
-      height: 664,
-      justifyContent: "flex-end",
-      paddingHorizontal: Padding.p_3xs,
-      paddingVertical: Padding.p_8xs,
+    container: {
+      // top: -344,
+
+      // left: 2,
+      backgroundColor: 'yellow',
+      flex: 1,
+      flexDirection: 'column',
+      // backgroundColor: Color.colorGray_200,
+      // width: 425,
+      // height: 664,
+      width: '100%',
+      // height: "100%",
+      height: "40%",
+      justifyContent: "center",
+      // paddingHorizontal: Padding.p_3xs,
+      // paddingVertical: Padding.p_8xs,
       alignItems: "center",
       borderRadius: 11,
       shadowOpacity: 1,
@@ -351,7 +305,7 @@ const styles = StyleSheet.create({
         height: 4.487196445465088,
       },
       shadowColor: "rgba(0, 0, 0, 0.15)",
-      position: "absolute",
+      // position: "absolute",
       overflow: "hidden",
     },
     drawerMenuIcon2: {
@@ -478,10 +432,10 @@ const styles = StyleSheet.create({
       overflow: "hidden",
     },
     containerGroup: {
-      top: 80,
-      left: 39,
-      width: 360,
-      height: 126,
+      // top: 70,
+      // left: 39,
+      width: '100%',
+      height: '100%'
     },
     todaysEarning: {
       textAlign: "left",
@@ -498,7 +452,7 @@ const styles = StyleSheet.create({
     },
     birrday1: {
       color: Color.colorWhite,
-      textAlign: "center",
+      textAlign: "left",
     },
     containervariant92: {
       width: 111,
@@ -507,10 +461,12 @@ const styles = StyleSheet.create({
       marginLeft: 25,
     },
     frameParent: {
-      top: 217,
-      left: 43,
-      width: 336,
-      height: 82,
+      // top: 217,
+      // left: 43,
+      // width: 336,
+      // height: 82,
+      width: '100%',
+      height: '100%'
     },
     drawerMenuIcon3: {
       top: 640,

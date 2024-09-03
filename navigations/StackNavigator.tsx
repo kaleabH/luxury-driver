@@ -8,12 +8,14 @@ import Login, { LoginScreenProps } from '../screens/Login';
 import Register from '../screens/Register';
 import Verification from '../screens/Verification';
 import DrawerNavigator, {DrawerParamsList}  from './DrawerNavigator';
+import TestScreen from '../screens/TestScreen';
 
 export type StackParamsList = {
     // Home: undefined;
     Login: LoginScreenProps;
     Register: undefined;
     Verification: undefined;
+    TestScreen: undefined;
     DrawerNavigator: NavigatorScreenParams<DrawerParamsList>
 
 }
@@ -40,6 +42,10 @@ const StackNavigator: React.FC<StackProps> = ()=> {
              <Stack.Screen
                   component={Verification}
                   name="Verification"
+             />
+             <Stack.Screen
+                  component={TestScreen}
+                  name="TestScreen"
              />
             <Stack.Screen
                component={DrawerNavigator}

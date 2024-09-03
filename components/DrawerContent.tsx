@@ -29,8 +29,8 @@ import { DrawerParamsList } from '../navigations/DrawerNavigator';
 
 
 // import { DrawerParamsList, DrawerProps } from '../../types';
-type DrawerContentNavigationProp = DrawerScreenProps<DrawerParamsList, 'DrawerContent'>['navigation']
-type DrawerContentRouteProp = DrawerScreenProps<DrawerParamsList, 'DrawerContent'>['route']
+// type DrawerContentNavigationProp = DrawerScreenProps<DrawerParamsList, 'DrawerContent'>['navigation']
+// type DrawerContentRouteProp = DrawerScreenProps<DrawerParamsList, 'DrawerContent'>['route']
 
 
 export const DrawerContent: React.FC<DrawerContentComponentProps>=(props)=>{
@@ -60,7 +60,7 @@ export const DrawerContent: React.FC<DrawerContentComponentProps>=(props)=>{
                             icon={({color, size}) => (
                                 <EIcon name="home" color={color} size={size} />
                             )}
-                            color="#B80028" 
+                            activeTintColor="#B80028" 
                             label="Home"
                             onPress={() => {props.navigation.navigate('TabBarNavigator',{
                                 screen:"Home"
@@ -71,7 +71,7 @@ export const DrawerContent: React.FC<DrawerContentComponentProps>=(props)=>{
                                 <FontAwesome name="history" color={color} size={size} />
                             )}
                             label="RideHistory"
-                            color="#B80028"
+                            activeTintColor="#B80028"
                             onPress={() => {props.navigation.navigate('TabBarNavigator',{
                                 screen:"RideHistory"
                             })}}
