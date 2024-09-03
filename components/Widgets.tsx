@@ -1,5 +1,5 @@
 import React, {ReactNode, useState} from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native'
 import { FAB, Portal, PaperProvider, Button, Icon as PIcon, Modal} from 'react-native-paper';
 import Icon from './Icon'
 import theme from '../theme';
@@ -29,7 +29,7 @@ interface WidgetsProps{
 }
 
 
-
+const { width, height } = Dimensions.get("window");
 const Widgets: React.FC<WidgetsProps> = (props) => {
   // let mapRef: MapView | null = null;
   // const [mapRef, setMapRef] =useState<MapView| null>(null);
@@ -69,12 +69,14 @@ const Widgets: React.FC<WidgetsProps> = (props) => {
     <PaperProvider>
 
     <Portal>
+              
         <View style={styles.container}>
-                <Modal visible={visible} onDismiss={hideModal} style={styles.modal}>
-          <CreateTrip closeModal={hideModal}/>
-                </Modal>
                 <View style={styles.screenContainer}>
-                <ChildrenProp {...props} />
+                {/* <ChildrenProp {...props} ref={mapRef}/> */}
+                {
+                  props.children({handleCenterMap: centerMap, latLng, setLatLng, mapRef})
+                
+                }
                 </View>
                 <View style={[ styles.leftWidgets]}>
 
@@ -167,10 +169,9 @@ size={32}/>
                    }}
                  />
          </View>
-    
-    
-      
-    
+         <Modal visible={visible} onDismiss={hideModal} style={styles.modal}>
+          <CreateTrip closeModal={hideModal}/>
+                </Modal>
     </Portal>
   </PaperProvider>
   )
@@ -182,12 +183,12 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         position: 'absolute',
         // transform: [{scale: 0.5}],
-        // width:'100%',
+        width:'100%',
+        height: '100%',
         // justifyContent:"space-between",
         // alignItems:"flex-end",
         // zIndex:-1000
-        
-        // backgroundColor:'green'
+        backgroundColor:'green'
       },
       fabContainer:{
         // flex:1,
@@ -198,6 +199,7 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         alignItems:"flex-end",
         alignSelf: 'center',
+        zIndex: 2
         // backgroundColor: 'green',
         // zIndex:-1000
 
@@ -215,7 +217,7 @@ const styles = StyleSheet.create({
        width: 0,
        marginRight:10,
        position: 'absolute',
-       zIndex: 2
+       zIndex: 3
 
       // //  padding:'0%',
       // //  zIndex: -1000,
@@ -232,7 +234,7 @@ const styles = StyleSheet.create({
        backgroundColor: 'purple',
        width: 0,
        position: 'absolute', 
-       zIndex: 2,
+       zIndex: 3,
       // //  zIndex: -1000,
       //  flexDirection: "column"
   },
@@ -243,16 +245,18 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         alignItems:"center",
         borderColor: 'black',
-        borderWidth: 3
+        borderWidth: 2
 
         // backgroundColor:'green'
     },
     screenContainer:{
         flex: 1,
         width: '100%',
+        height: '100%',
         alignSelf:'center',
         position:'absolute',
-        zIndex: 3
+        // top:20,
+        zIndex: 2
 
     },
    
@@ -265,7 +269,7 @@ const styles = StyleSheet.create({
         width: 58,
         height: 58,
         borderRadius: 48,
-        zIndex: 2
+        zIndex: 1
         // zIndex: -1000,
     },
     icon:{
@@ -295,13 +299,15 @@ const styles = StyleSheet.create({
         borderRadius: 48,
     },
     modal:{
-      // flex: 1,
+      flex: 1,
+      alignSelf:'center',
+      position:'absolute',
+      // top:20,
+      zIndex: 1,
       // zIndex:1000,
       justifyContent: 'center',
       alignItems: 'center',
-      alignSelf:'center',
-      position:'absolute',
-      zIndex:3
+    
     }
 })
 

@@ -1,4 +1,4 @@
-import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, Image, KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native'
 import React,{useState} from 'react'
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import withWidgets from '../../components/withWidgets';
@@ -23,33 +23,37 @@ interface HomeScreenProps extends DrawerScreenProps<DrawerParamsList,'Home'> {
 const { width, height } = Dimensions.get("window");
 
 const Home: React.FC< HomeScreenProps> = (props) => {
-    const {latLng, setLatLng, onCenterMap, mapRef, setMapRef} = props;
+    // const {latLng, setLatLng, onCenterMap} = props;
+    const[isMapReady, setIsMapReady] = useState(false)
+    // let {mapRef} = props;
 
 
-    // function centerMap() {
-    //     mapRef?.animateToRegion(
-    //       {
-    //         ...latLng,
-    //         latitudeDelta: 0.0922,
-    //         longitudeDelta: 0.0421,
-    //       },
-    //       1000,
-    //     );
-    //   }
+    function centerMap() {
+        mapRef?.animateToRegion(
+          {
+            ...latLng,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          },
+          1000,
+        );
+      }
 
-    // let mapRef: MapView | null = null;
-    // const [latLng, setLatLng] = useState<ILatLng>({
-    //     latitude: 8.9831,
-    //     longitude: 38.8101,
-    // });
+    let mapRef: MapView | null = null;
+    const [latLng, setLatLng] = useState<ILatLng>({
+        latitude: 8.9831,
+        longitude: 38.8101,
+    });
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView style={styles.container}>
         {/* <TopSliderSheet/> */}
     <MapView
-            ref={map => {
-                setMapRef(map);
-              }}
+            ref={mapRef}
                 style={styles.map}
+                onMapReady={()=>{
+                    console.log('map is ready')
+                    setIsMapReady(true)
+                }}
                 provider={PROVIDER_GOOGLE}
                 initialRegion={{
                     latitude: 8.9831,
@@ -58,12 +62,14 @@ const Home: React.FC< HomeScreenProps> = (props) => {
                     longitudeDelta: 0.0421,
                 }}
             >
-                <Marker  coordinate={latLng}  >
-                <Image style={{transform: [{scale: 0.25},{rotateY: '19deg'}]}} source={require('../../assets/icons/marker.png')}/>
-                </Marker>
-
+                {
+                    isMapReady && <Marker  coordinate={latLng}  >
+                    <Image style={{transform: [{scale: 0.25},{rotateY: '19deg'}]}} source={require('../../assets/icons/marker.png')}/>
+                    </Marker>
+    
+                }
             </MapView>
-</View>
+</KeyboardAvoidingView>
 )
 }
 
@@ -71,9 +77,12 @@ const styles = StyleSheet.create({
 container:{
     flex: 1,
     flexDirection:'row',
+    // width,height,
     width: '100%',
+    height: '100%',
     justifyContent:'center',
     alignItems: 'center',
+    // backgroundColor: 'green'
 },
 map: {
     flex: 1,
@@ -83,6 +92,7 @@ map: {
     position: 'absolute',
     zIndex: 2,
     alignSelf: 'center',
+    // width,height
 
 },
 })
