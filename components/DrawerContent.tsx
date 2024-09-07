@@ -51,8 +51,8 @@ export const DrawerContent: React.FC<DrawerContentComponentProps>=(props)=>{
                         source={require('../assets/avatar.png')} 
                         style={[styles.avatar, {backgroundColor:"#FF7F7F"}]} 
                     />
-                    <Text style={styles.userName}>Abel Tesfaye</Text>
-                    <Text style={styles.userEmail}>abel.tesfaye@gmail.com</Text>
+                    <Text style={styles.userName}>Sol Man</Text>
+                    <Text style={styles.userEmail}>solomonTest@gmail.com</Text>
                     </View>
 
                     <Drawer.Section style={styles.drawerSection}>
@@ -62,9 +62,7 @@ export const DrawerContent: React.FC<DrawerContentComponentProps>=(props)=>{
                             )}
                             activeTintColor="#B80028" 
                             label="Home"
-                            onPress={() => {props.navigation.navigate('TabBarNavigator',{
-                                screen:"Home"
-                            })}}
+                            onPress={() => {props.navigation.navigate('Home')}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
@@ -72,36 +70,28 @@ export const DrawerContent: React.FC<DrawerContentComponentProps>=(props)=>{
                             )}
                             label="RideHistory"
                             activeTintColor="#B80028"
-                            onPress={() => {props.navigation.navigate('TabBarNavigator',{
-                                screen:"RideHistory"
-                            })}}
+                            onPress={() => {props.navigation.navigate('RideHistory')}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
                                 <FontAwesome5 name="wallet" color={color} size={size} />
                             )}
                             label="Wallet"
-                            onPress={() => {props.navigation.navigate('TabBarNavigator',{
-                                screen:"Wallet"
-                            })}}
+                            onPress={() => {props.navigation.navigate('Wallet')}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
                                 <FontAwesomeS name="share" color={color} size={size} />
                             )}
                             label="Share"
-                            onPress={() => {props.navigation.navigate('TabBarNavigator',{
-                                screen:"Share"
-                            })}}
+                            onPress={() => {}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
                                 <ContactSupport name="contact-support" color={color} size={size} />
                             )}
                             label="Support"
-                            onPress={() => {props.navigation.navigate('TabBarNavigator',{
-                                screen:"Support"
-                            })}}
+                            onPress={() => {props.navigation.navigate('Support')}}
                         />
                     </Drawer.Section>
                     <Drawer.Section title="Preferences">

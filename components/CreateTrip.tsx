@@ -482,6 +482,8 @@ const styles = StyleSheet.create({
         shadowRadius: 5.59,
       },
       driverRideBooking: {
+        transform: [{scale: 0.75}],
+
         // top: 244,
         // left: 9,
         // width: 409,

@@ -14,7 +14,7 @@ export type StackParamsList = {
     // Home: undefined;
     Login: LoginScreenProps;
     Register: undefined;
-    Verification: undefined;
+    Verification: {phoneNumber: string, otp: string};
     TestScreen: undefined;
     DrawerNavigator: NavigatorScreenParams<DrawerParamsList>
 

@@ -3,12 +3,13 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { TextInput, Button, Text, Card, IconButton } from 'react-native-paper';
-import {useNavigation} from '@react-navigation/native';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 import CountryPicker, { Country, CountryCode } from 'react-native-country-picker-modal';
 import CustomButton from '../../components/Button';
 import { Image } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { StackParamsList } from '../../navigations/StackNavigator';
+import { Alert } from 'react-native';
 
 
 export interface LoginScreenProps{
@@ -19,58 +20,67 @@ const Login: React.FC<StackScreenProps<StackParamsList, 'Login'>> = ({navigation
   const [countryCode, setCountryCode] = useState<CountryCode>('ET');
   const [country, setCountry] = useState<Country | null>(null);
   const [visible, setVisible] = useState<boolean>(false);
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
+
+
+  // const nav = navigation || useNavigation<NavigationProp<StackParamsList>>();
+
+  const generateOTP = (): string => {
+    return Math.floor(1000 + Math.random() * 9000).toString(); // Generate 4-digit OTP
+  };
 
   const handlePress = () => {
-    navigation.navigate('Verification');
+    const otp = generateOTP();
+    Alert.alert('OTP Sent', `Phone: ${phoneNumber}, OTP: ${otp}`);
+    navigation.navigate('Verification', { phoneNumber, otp }); // Pass OTP to verification screen
   };
 
   const handleSelectCountry = (country: Country) => {
     setCountryCode(country.cca2);
     setCountry(country);
-    setVisible(false);  // Close the country picker after selection
+    setVisible(false); // Close the country picker after selection
   };
 
   return (
     <View style={styles.container}>
-      {/* <Card.Cover source={require('../../../assets/icon2.png')} style={styles.image} /> */}
       <View style={styles.formContainer}>
         <Image source={require('../../assets/icon.png')} style={styles.image} />
-        <Text style={styles.heading}>Earn Luxuryum on every trip</Text>
+        <Text style={styles.heading}>Luxury Driver</Text>
       </View>
-        <View style={styles.row}>
-          <TouchableOpacity
-            style={styles.pickerContainer}
-            onPress={() => setVisible(true)}
-          >
-            <CountryPicker
-              countryCode={countryCode}
-              withFlag={true}
-              withFilter={true}
-              withCallingCode={true}
-              visible={visible}
-              onClose={() => setVisible(false)}
-              onSelect={handleSelectCountry}
-              containerButtonStyle={styles.countryPicker}
-            />
-            <IconButton
-              icon="chevron-down"
-              size={24}
-              iconColor="#B80028"
-              style={styles.arrowIcon}
-            />
-          </TouchableOpacity>
-          <TextInput
-            mode="outlined"
-            // placeholder="Please enter a mobile number"
-            // left={<TextInput.Icon name="phone" />
-            keyboardType="numeric"
-            placeholder="987 65 43"
-            style={styles.input}
-            outlineColor="transparent"
-            activeOutlineColor="transparent"
+      <View style={styles.row}>
+        <TouchableOpacity
+          style={styles.pickerContainer}
+          onPress={() => setVisible(true)}
+        >
+          <CountryPicker
+            countryCode={countryCode}
+            withFlag={true}
+            withFilter={true}
+            withCallingCode={true}
+            visible={visible}
+            onClose={() => setVisible(false)}
+            onSelect={handleSelectCountry}
+            containerButtonStyle={styles.countryPicker}
           />
-        </View>
-        <CustomButton title="Continue" onPress={handlePress} />
+          <IconButton
+            icon="chevron-down"
+            size={24}
+            iconColor="#B80028"
+            style={styles.arrowIcon}
+          />
+        </TouchableOpacity>
+        <TextInput
+          mode="outlined"
+          keyboardType="numeric"
+          placeholder="987 65 43"
+          style={styles.input}
+          outlineColor="transparent"
+          activeOutlineColor="transparent"
+          value={phoneNumber}
+          onChangeText={setPhoneNumber}
+        />
+      </View>
+      <CustomButton title="Continue" onPress={handlePress} />
     </View>
   );
 };
@@ -81,13 +91,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
   },
   image: {
-    height:105,
-    width:100,
-    alignSelf:"center",
-    marginBottom:210,
-    marginTop:170,
-
-    // borderRadius:0,
+    height: 105,
+    width: 100,
+    alignSelf: 'center',
+    marginBottom: 210,
+    marginTop: 170,
   },
   formContainer: {
     flex: 1,
@@ -105,7 +113,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 10,
     alignItems: 'center',
-    paddingHorizontal:10,
+    paddingHorizontal: 10,
   },
   pickerContainer: {
     flexDirection: 'row',
@@ -119,7 +127,6 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    // marginLeft: 10,
     backgroundColor: '#fff',
     elevation: 4,
     shadowColor: '#000',

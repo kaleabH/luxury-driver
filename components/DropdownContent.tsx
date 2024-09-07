@@ -1,11 +1,10 @@
 import { StyleSheet, Text, View, Image} from 'react-native'
 import React from 'react'
 import { FontFamily, FontSize, Padding, Color, Border } from "../GlobalStyles";
+import RideRequest from './RideRequest';
 const DropdownContent = () => {
   return (
     <View style={styles.container}>
-   
-    
       <View style={[styles.containerGroup, styles.frameParentFlexBox]}>
         <View style={styles.container1}>
           <Image
@@ -66,6 +65,7 @@ const DropdownContent = () => {
           </View>
         </View>
       </View>
+      {/* <RideRequest/> */}
       </View>
   )
 }
@@ -112,11 +112,14 @@ const styles = StyleSheet.create({
     frameParentFlexBox: {
       // paddingVertical: Padding.p_sm,
       // paddingHorizontal: Padding.p_mini,
-      backgroundColor: Color.colorWhitesmoke,
-      // backgroundColor: 'green',
+      // backgroundColor: Color.colorWhitesmoke,
+      // backgroundColor: 'red',
+      // height: 100,
+      // flex: 1,
+      // flex:1,
       flexDirection: "row",
       justifyContent: "center",
-      alignItems: "center",
+      // alignItems: "flex-end",
       // position: "absolute",
     },
     textTypo: {
@@ -283,15 +286,21 @@ const styles = StyleSheet.create({
       // top: -344,
 
       // left: 2,
-      backgroundColor: 'yellow',
-      flex: 1,
+      // backgroundColor: 'yellow',
+      // flex: 1,
       flexDirection: 'column',
-      // backgroundColor: Color.colorGray_200,
+      backgroundColor: Color.colorGray_200,
+      // backgroundColor: 'pink',
+      // borderWidth: 3,
+      // borderColor: 'black',
       // width: 425,
-      // height: 664,
+      // height: 164,
+      // paddingVertical: 0,
+
       width: '100%',
-      // height: "100%",
-      height: "40%",
+      // height: "90%",
+      height: 300,
+      // height: "40%",
       justifyContent: "center",
       // paddingHorizontal: Padding.p_3xs,
       // paddingVertical: Padding.p_8xs,
@@ -305,8 +314,8 @@ const styles = StyleSheet.create({
         height: 4.487196445465088,
       },
       shadowColor: "rgba(0, 0, 0, 0.15)",
-      // position: "absolute",
-      overflow: "hidden",
+      // // position: "absolute",
+      // overflow: "hidden",
     },
     drawerMenuIcon2: {
       left: 341,
@@ -391,8 +400,8 @@ const styles = StyleSheet.create({
       fontWeight: "300",
     },
     container1: {
-      paddingBottom: Padding.p_mini_2,
-      paddingTop: 11,
+      // paddingBottom: Padding.p_mini_2,
+      // paddingTop: 11,
       paddingHorizontal: Padding.p_mini_2,
       height: 114,
       width: 91,
@@ -433,9 +442,12 @@ const styles = StyleSheet.create({
     },
     containerGroup: {
       // top: 70,
-      // left: 39,
+      // left: 39,\
+      flex: 1,
+      alignItems: 'center',
+      // backgroundColor: 'red',
       width: '100%',
-      height: '100%'
+      height: '60%'
     },
     todaysEarning: {
       textAlign: "left",
@@ -464,9 +476,11 @@ const styles = StyleSheet.create({
       // top: 217,
       // left: 43,
       // width: 336,
-      // height: 82,
+      // height: 42,
+      height: '30%',
       width: '100%',
-      height: '100%'
+      alignItems: 'flex-end',
+      // backgroundColor: 'blue'
     },
     drawerMenuIcon3: {
       top: 640,

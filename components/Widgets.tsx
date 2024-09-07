@@ -81,7 +81,7 @@ const Widgets: React.FC<WidgetsProps> = (props) => {
                 <View style={[ styles.leftWidgets]}>
 
 <TouchableIcon 
-  source={require('../assets/icons/target_red.png')}
+  source={require('../assets/icons/plus_red.png')}
   onPress={showModal}
   size={32}/>
 
@@ -105,12 +105,12 @@ size={32}/>
                 size={32}/>
                 </TouchableIcon>
              
-                <TouchableIcon>
+                {/* <TouchableIcon>
                 <PIcon
                 source="crosshairs-gps"
                 color={theme.color.textColor}
                 size={25}/>
-                </TouchableIcon>
+                </TouchableIcon> */}
 
                 </View>
                  <FAB.Group
@@ -133,25 +133,25 @@ size={32}/>
                 onPress: () => console.log('Pressed star'),
             },
             {
-                icon: 'email',
+                icon: 'wallet',
                 style:[styles.fabItems, {transform: [{translateX:80},{translateY: 220}]}],
                 // label: 'Email',
                 color:theme.color.textColor,
-                onPress: () => console.log('Pressed email'),
+                onPress: () => {navigator.navigate('Wallet')},
             },
             {
-                icon: 'bell',
+                icon: 'home',
                 style: [styles.fabItems, {transform: [{translateY:70}]}],
                 color:theme.color.textColor,
             // label: 'Remind',
-            onPress: () => console.log('Pressed notifications'),
+            onPress: () => {navigator.navigate('Home')},
           },
             {
-                icon: 'email',
+                icon: 'history',
                 style:[styles.fabItems, {transform: [{translateX: -70}, {translateY:30}]}],
                 // label: 'Email',
                 color:theme.color.textColor,
-                onPress: () => console.log('Pressed email'),
+                onPress: () => {navigator.navigate('RideHistory')},
             },
             {
                 icon: 'bell',
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
         // justifyContent:"space-between",
         // alignItems:"flex-end",
         // zIndex:-1000
-        backgroundColor:'green'
+        // backgroundColor:'green'
       },
       fabContainer:{
         // flex:1,
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         alignItems:"flex-end",
         alignSelf: 'center',
-        zIndex: 2
+        zIndex: 3
         // backgroundColor: 'green',
         // zIndex:-1000
 
