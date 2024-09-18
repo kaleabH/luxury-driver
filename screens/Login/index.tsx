@@ -80,6 +80,12 @@ const Login: React.FC<StackScreenProps<StackParamsList, 'Login'>> = ({navigation
           onChangeText={setPhoneNumber}
         />
       </View>
+      <View style={styles.signInContainer}>
+        <Text>or</Text>
+         <TouchableOpacity onPress={()=>{navigation.navigate('LoginWithEmail',[])}}>
+      <Text style= {{fontSize: 20, color: '#B80028', fontWeight: 'bold', paddingBottom: 10}} >sign in with Email</Text>
+         </TouchableOpacity>
+      </View>
       <CustomButton title="Continue" onPress={handlePress} />
     </View>
   );
@@ -89,6 +95,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',
+  },
+  signInContainer: {
+     height: 70,
+     justifyContent: 'space-around',
+     alignItems: 'center',
+     flexDirection: 'column'
   },
   image: {
     height: 105,

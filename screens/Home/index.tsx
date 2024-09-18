@@ -1,5 +1,5 @@
 import { Dimensions, Image, KeyboardAvoidingView, StyleSheet, Text, View, Alert } from 'react-native'
-import React,{useState, useEffect} from 'react'
+import React,{useState, useEffect, useContext} from 'react'
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import withWidgets from '../../components/withWidgets';
 import TopSliderSheet from '../../components/TopSliderSheet';
@@ -9,6 +9,7 @@ import {Icon as PIcon} from 'react-native-paper'
 import TouchableIcon from '../../components/TouchableIcon';
 import theme from '../../theme';
 import RideRequest from '../../components/RideRequest';
+import AuthContext, {ContextType} from '../../contexts/AuthContext';
 export interface ILatLng {
     latitude: number;
     longitude: number;
@@ -38,6 +39,9 @@ const Home: React.FC< HomeScreenProps> = (props) => {
     const [locations, setLocations] = useState<string[]>([]);
     // const navigation = useNavigation();
 
+      const data =useContext(AuthContext);
+
+
     const [latLng, setLatLng] = useState<ILatLng>({
         latitude: 8.9831,
         longitude: 38.8101,
@@ -61,7 +65,9 @@ const Home: React.FC< HomeScreenProps> = (props) => {
       }, []);
     
 
-
+      useEffect(()=>{
+        console.log(data)
+      },[])
 
     const handleAddStop = () => {
         setLocations([...locations, '']);

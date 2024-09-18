@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { NavigationContainer, NavigatorScreenParams } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import theme from './../theme';
 import Login, { LoginScreenProps } from '../screens/Login';
-import Register from '../screens/Register';
+import Register, { RegisterScreenProps } from '../screens/Register';
 import Verification from '../screens/Verification';
 import DrawerNavigator, {DrawerParamsList}  from './DrawerNavigator';
 import TestScreen from '../screens/TestScreen';
+import LoginWithEmail, { LoginWithEmailPropsList } from '../screens/LoginWithEmail';
+import AuthContext, { User } from '../contexts/AuthContext'
+import {loadAuthUser} from '../services/AuthService'
 
 export type StackParamsList = {
     // Home: undefined;
     Login: LoginScreenProps;
-    Register: undefined;
+    LoginWithEmail: LoginWithEmailPropsList;
+    Register: RegisterScreenProps;
     Verification: {phoneNumber: string, otp: string};
     TestScreen: undefined;
     DrawerNavigator: NavigatorScreenParams<DrawerParamsList>
@@ -26,20 +30,56 @@ type StackProps  ={
 
 
 const StackNavigator: React.FC<StackProps> = ()=> {
+    const [user, setUser] = useState<User>()
     const Stack = createStackNavigator<StackParamsList>()
+
+    useEffect(()=>{
+        async function runEffect(){
+            try{
+                const user = await loadAuthUser();
+                setUser(user);
+
+            } catch(e){
+                console.log('Failed to load user', e)
+            }
+        }
+
+    },[])
   return (
+    <AuthContext.Provider value={{user, setUser}}>
+
+    
     <NavigationContainer>
         <Stack.Navigator initialRouteName='Login' screenOptions={{ headerShown: false }} >
+            {user ?
+             (
+             <>
+           
+            <Stack.Screen
+               component={DrawerNavigator}
+                name={"DrawerNavigator"}
+            />
+            </>
+            )
+            :
+            (
+                <>
             <Stack.Screen
                component={Login}
                name={"Login"}
 
             />
+            <Stack.Screen
+               component={LoginWithEmail}
+               name={"LoginWithEmail"}
+
+            />
+
              <Stack.Screen
                  component={Register}
                  name="Register"
              />
-             <Stack.Screen
+               <Stack.Screen
                   component={Verification}
                   name="Verification"
              />
@@ -47,12 +87,11 @@ const StackNavigator: React.FC<StackProps> = ()=> {
                   component={TestScreen}
                   name="TestScreen"
              />
-            <Stack.Screen
-               component={DrawerNavigator}
-                name={"DrawerNavigator"}
-            />
+             </>)
+}
         </Stack.Navigator>
     </NavigationContainer>
+    </AuthContext.Provider>
   )
 }
 

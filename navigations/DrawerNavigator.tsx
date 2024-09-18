@@ -12,7 +12,7 @@ import Support from '../screens/Support'
 
 type DrawerProps = {}
 export type DrawerParamsList = {
-  Home: HomeScreenParams;
+  Home: undefined;
   Wallet: undefined;
   RideHistory: undefined;
   Support: undefined;
@@ -22,7 +22,8 @@ export type DrawerParamsList = {
 const DrawerNavigator: React.FC<DrawerProps> = () => {
   const Drawer = createDrawerNavigator<DrawerParamsList>()
   return (
-  <Drawer.Navigator 
+  <Drawer.Navigator
+   initialRouteName='Home'
   screenOptions={{  header:(props:DrawerHeaderProps):ReactNode=>(
 
       <View style={styles.headerContainer}>
