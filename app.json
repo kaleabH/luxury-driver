@@ -20,17 +20,23 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
       },
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyBVdYR5KOl5GHK9p-DJ1DLx5bJgc8D3rLg"
         }
-      }
+      },
+      "package": "com.kaleabhaliu.luxuryriderapprider"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "2070cfc0-cf0f-4d2e-8897-ef53622d0360"
+      }
     }
   }
 }
