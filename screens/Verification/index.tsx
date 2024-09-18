@@ -13,10 +13,13 @@ import { StackParamsList } from '../../navigations/StackNavigator';
 
 
 type VerificationScreenProps = StackScreenProps<StackParamsList, 'Verification'>
+
+type VerificationNavigation = VerificationScreenProps['navigation']
+type VerificationRoute = VerificationScreenProps['route']
 export type VerificationPropsList ={}
 
 
-const Verification: React.FC<VerificationScreenProps> = ({navigation, route, ...props}) => {
+const Verification: React.FC<VerificationScreenProps & VerificationNavigation &  VerificationRoute> = ({navigation, route, ...props}) => {
   // const navigation = useNavigation();
   const { phoneNumber, otp } = route.params; // Get phoneNumber and OTP from route params
   const [enteredOTP, setEnteredOTP] = useState(['', '', '', '']); // Array to hold the OTP input for 4 fields
@@ -35,7 +38,7 @@ const Verification: React.FC<VerificationScreenProps> = ({navigation, route, ...
     if (fullEnteredOTP.length === 4) {
       if (fullEnteredOTP === otp) {
         Alert.alert('Success', 'OTP Verified');
-        navigation.navigate('DrawerNavigator');
+        navigation.navigate('DrawerNavigator',{screen: 'Home', params: {}});
       } else {
         Alert.alert('Error', 'Invalid OTP. Please try again.');
       }
@@ -71,25 +74,25 @@ const Verification: React.FC<VerificationScreenProps> = ({navigation, route, ...
         </S.Description>
         <S.CodeContainer>
           <CodeInput 
-            onChangeText={(value) => handleOTPChange(0, value)} 
+            onChangeText={(value: string):void => {handleOTPChange(0, value)}} 
             autoFocus 
             maxLength={1}
             keyboardType="numeric"
           />
           <CodeInput 
-            onChangeText={(value) => handleOTPChange(1, value)} 
+            onChangeText={(value: string) => handleOTPChange(1, value)} 
             ref={codeRef2} 
             maxLength={1}
             keyboardType="numeric"
           />
           <CodeInput 
-            onChangeText={(value) => handleOTPChange(2, value)} 
+            onChangeText={(value: string) => handleOTPChange(2, value)} 
             ref={codeRef3} 
             maxLength={1}
             keyboardType="numeric"
           />
           <CodeInput
-            onChangeText={(value: string): void| undefined => handleOTPChange(3, value)} 
+            onChangeText={(value: string): void => handleOTPChange(3, value)} 
             ref={codeRef4}
             maxLength={1}
             keyboardType="numeric"

@@ -3,10 +3,11 @@ import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-nati
 import { FAB, Portal, PaperProvider, Button, Icon as PIcon, Modal} from 'react-native-paper';
 import Icon from './Icon'
 import theme from '../theme';
-import { useNavigation } from '@react-navigation/native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import CreateTrip from './CreateTrip';
 import TouchableIcon from './TouchableIcon';
 import MapView from 'react-native-maps';
+import { DrawerParamsList } from '../navigations/DrawerNavigator';
 
 interface ILatLng {
   latitude: number;
@@ -61,7 +62,7 @@ const Widgets: React.FC<WidgetsProps> = (props) => {
     const [state, setState] = useState({ open: false });
 
     const onStateChange = ({ open }: {open: boolean}) => setState({ open });
-    const navigator = useNavigation();
+    const navigator = useNavigation<NavigationProp<DrawerParamsList>>();
   
     const { open } = state;
 
@@ -69,7 +70,11 @@ const Widgets: React.FC<WidgetsProps> = (props) => {
     <PaperProvider>
 
     <Portal>
-              
+    <Modal visible={visible} onDismiss={hideModal} style={styles.modal}>
+          <CreateTrip closeModal={hideModal}/>
+                </Modal>
+    </Portal>
+
         <View style={styles.container}>
                 <View style={styles.screenContainer}>
                 {/* <ChildrenProp {...props} ref={mapRef}/> */}
@@ -144,7 +149,7 @@ size={32}/>
                 style: [styles.fabItems, {transform: [{translateY:70}]}],
                 color:theme.color.textColor,
             // label: 'Remind',
-            onPress: () => {navigator.navigate('Home')},
+            onPress: () => {navigator.navigate('Home',{})},
           },
             {
                 icon: 'history',
@@ -169,22 +174,21 @@ size={32}/>
                    }}
                  />
          </View>
-         <Modal visible={visible} onDismiss={hideModal} style={styles.modal}>
-          <CreateTrip closeModal={hideModal}/>
-                </Modal>
-    </Portal>
+    
   </PaperProvider>
   )
 }
 
 const styles = StyleSheet.create({
     container:{
-        flex:1,
+        // flex:1,
         flexDirection:'row',
         position: 'absolute',
+        zIndex: 2,
         // transform: [{scale: 0.5}],
         width:'100%',
         height: '100%',
+        // transform: [{scale: 0.5}]
         // justifyContent:"space-between",
         // alignItems:"flex-end",
         // zIndex:-1000
