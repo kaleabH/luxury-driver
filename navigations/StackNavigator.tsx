@@ -6,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import theme from './../theme';
 import Login, { LoginScreenProps } from '../screens/Login';
 import Register, { RegisterScreenProps } from '../screens/Register';
-import Verification from '../screens/Verification';
+import Verification, { VerificationPropsList } from '../screens/Verification';
 import DrawerNavigator, {DrawerParamsList}  from './DrawerNavigator';
 import TestScreen from '../screens/TestScreen';
 import LoginWithEmail, { LoginWithEmailPropsList } from '../screens/LoginWithEmail';
@@ -18,9 +18,10 @@ export type StackParamsList = {
     Login: LoginScreenProps;
     LoginWithEmail: LoginWithEmailPropsList;
     Register: RegisterScreenProps;
-    Verification: {phoneNumber: string, otp: string};
+    Verification:VerificationPropsList;
     TestScreen: undefined;
     DrawerNavigator: NavigatorScreenParams<DrawerParamsList>
+    // DrawerNavigator: undefined;
 
 }
 
@@ -43,6 +44,7 @@ const StackNavigator: React.FC<StackProps> = ()=> {
                 console.log('Failed to load user', e)
             }
         }
+        runEffect()
 
     },[])
   return (
@@ -51,7 +53,7 @@ const StackNavigator: React.FC<StackProps> = ()=> {
     
     <NavigationContainer>
         <Stack.Navigator initialRouteName='Login' screenOptions={{ headerShown: false }} >
-            {user ?
+            {
              (
              <>
            
@@ -59,11 +61,11 @@ const StackNavigator: React.FC<StackProps> = ()=> {
                component={DrawerNavigator}
                 name={"DrawerNavigator"}
             />
-            </>
+            {/* </>
             )
             :
             (
-                <>
+                <> */}
             <Stack.Screen
                component={Login}
                name={"Login"}

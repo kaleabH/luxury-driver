@@ -1,6 +1,6 @@
 import { User } from "../contexts/AuthContext";
 import axios from "../utils/axios";
-import { setToken } from "./TokenServices";
+import { getToken, setToken } from "./TokenServices";
 
 
 export interface Credentials{
@@ -10,15 +10,20 @@ export interface Credentials{
 } 
 
 export const login = async (credentials: Credentials): Promise<void> =>{
-    const { data } = await  axios.post('/login', credentials);
-    await setToken(data.token);
+    
+        const { data } = await  axios.post('/login', credentials);
+        console.log('the login data', data),
+        await setToken(data.token);
+
+        console.log('logged in !! ', await getToken())
 
 }
 
 
 export const loadAuthUser = async():Promise<User> => {
-    const {data: user} = await axios.get<User>('/user')
-    return user;
+    const {data: user} = await axios.get<User>('/user');
+    console.log('the user is ', user);
+    return user ;
 }
 
 export const logout = async ()=>{

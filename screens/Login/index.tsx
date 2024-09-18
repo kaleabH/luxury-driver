@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     height: 105,
     width: 100,
     alignSelf: 'center',
-    marginBottom: 210,
+    marginBottom: 80,
     marginTop: 170,
   },
   formContainer: {

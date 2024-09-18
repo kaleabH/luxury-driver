@@ -34,12 +34,13 @@ const LoginWithEmail: React.FC<LoginWithEmailScreenProps> = ({ navigation }) => 
       deviceInfo
     })
      }catch(e){
-      if(e.response ?. status === 422){
-         setErrorMessage(e.response.data.errors);
-      }
+      // if(e.response ?. status === 422){
+        //  setErrorMessage(e.response.data.errors);
+         console.log('login error', e)
+      // }
      }
 
-     navigation.navigate('DrawerNavigator');
+     navigation.navigate('DrawerNavigator',{screen: 'Home'});
      
 
   };
@@ -111,7 +112,7 @@ const LoginWithEmail: React.FC<LoginWithEmailScreenProps> = ({ navigation }) => 
           Login
         </Button>
         <View style={styles.signInContainer}>
-        <Text>not registered ?</Text>
+        <Text>or</Text>
          <TouchableOpacity onPress={()=>{navigation.navigate('Register',[])}}>
       <Text style= {{fontSize: 20, color: '#B80028', fontWeight: 'bold', paddingBottom: 10}} >Register</Text>
          </TouchableOpacity>
@@ -129,7 +130,6 @@ const styles = StyleSheet.create({
   },
   signInContainer: {
     height: 70,
-    marginTop: '15%',
     justifyContent: 'space-around',
     alignItems: 'center',
     flexDirection: 'column'

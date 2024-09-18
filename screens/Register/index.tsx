@@ -6,7 +6,7 @@ import CountryPicker, { Country, CountryCode } from 'react-native-country-picker
 import { StackScreenProps } from '@react-navigation/stack';
 import { StackParamsList } from '../../navigations/StackNavigator';
 
-export interface LoginWithEmailScreenProps {
+export interface RegisterScreenProps {
 
 }
 

@@ -16,10 +16,12 @@ type VerificationScreenProps = StackScreenProps<StackParamsList, 'Verification'>
 
 type VerificationNavigation = VerificationScreenProps['navigation']
 type VerificationRoute = VerificationScreenProps['route']
-export type VerificationPropsList ={}
+export type VerificationPropsList = {phoneNumber: string, otp: string}
 
 
-const Verification: React.FC<VerificationScreenProps & VerificationNavigation &  VerificationRoute> = ({navigation, route, ...props}) => {
+
+
+const Verification: React.FC<VerificationScreenProps > = ({navigation, route, ...props}) => {
   // const navigation = useNavigation();
   const { phoneNumber, otp } = route.params; // Get phoneNumber and OTP from route params
   const [enteredOTP, setEnteredOTP] = useState(['', '', '', '']); // Array to hold the OTP input for 4 fields
@@ -38,7 +40,7 @@ const Verification: React.FC<VerificationScreenProps & VerificationNavigation & 
     if (fullEnteredOTP.length === 4) {
       if (fullEnteredOTP === otp) {
         Alert.alert('Success', 'OTP Verified');
-        navigation.navigate('DrawerNavigator',{screen: 'Home', params: {}});
+        navigation.navigate('DrawerNavigator',{screen: 'Home'});
       } else {
         Alert.alert('Error', 'Invalid OTP. Please try again.');
       }
