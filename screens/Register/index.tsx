@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
-import { Appbar, TextInput, Button, Checkbox, Text, Avatar, Menu, Divider } from 'react-native-paper';
+import { Appbar, TextInput, Button, Checkbox, Text, Avatar, Menu, Divider, HelperText } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import CountryPicker, { Country, CountryCode } from 'react-native-country-picker-modal';
 import { StackScreenProps } from '@react-navigation/stack';
 import { StackParamsList } from '../../navigations/StackNavigator';
+import { register } from '../../services/AuthService';
+import { Platform } from 'react-native';
 
 export interface RegisterScreenProps {
 
@@ -13,8 +15,12 @@ export interface RegisterScreenProps {
 const Register: React.FC<StackScreenProps<StackParamsList, 'Register'>> = ({ navigation }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] =useState('');
+  const [emailError, setEmailError] = useState(false)
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState<Array<string> | null>(null);
   const [isPasswordVisible, setPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState<Country| null>(null);
@@ -23,21 +29,37 @@ const Register: React.FC<StackScreenProps<StackParamsList, 'Register'>> = ({ nav
   const [city, setCity] = useState('');
   const [isChecked, setChecked] = useState(false);
 
-  const handleRegister = () => {
-    if (!isChecked) {
-      Alert.alert("Please agree to the Terms and Conditions");
-      return;
-    }
-    // Handle registration logic
-    console.log({
-      firstName,
-      lastName,
-      password,
-      confirmPassword,
-      selectedCountry,
-      city,
-    });
+  const hasErrors = () => {
+    return !email.includes('@');
   };
+
+  const handleRegister = async () => {
+    const deviceInfo = `${Platform.OS} ${Platform.Version}`
+       try{
+         await register({
+          role: 'driver',
+          deviceInfo,
+          firstName,
+          lastName,
+          email,
+          phone,
+          password,
+          countryCode,
+          city,
+         });
+
+         navigation.navigate('DrawerNavigator', {screen: 'Home'});
+
+       }catch(e: any){
+        if(e?.response?.status === 422){
+          setErrorMessage(e.response.data.errors);
+          console.log('login error', e)
+       }
+       }
+
+  };
+
+
   const handleSelectCountry = (country: Country) => {
     setCountryCode(country.cca2);
     setSelectedCountry(country);
@@ -86,6 +108,30 @@ const Register: React.FC<StackScreenProps<StackParamsList, 'Register'>> = ({ nav
           style={styles.input}
           theme={{ colors: { primary: theme.colors.primary } }}
         />
+
+        {/* Email Input */}
+        <TextInput
+          label="Phone"
+          value={phone}
+          onChangeText={setPhone}
+          mode="outlined"
+          left={<TextInput.Icon icon="phone" />}
+          style={styles.input}
+          theme={{ colors: { primary: theme.colors.primary } }}
+          />
+        {/* Email Input */}
+        <TextInput
+          label="Email"
+          value={email}
+          onChangeText={(e)=>{
+             setEmail(e)}}
+             onEndEditing={()=>{setEmailError(hasErrors())}}
+          mode="outlined"
+          left={<TextInput.Icon icon="email" />}
+          style={styles.input}
+          theme={{ colors: { primary: theme.colors.primary } }}
+          />
+        
 
         {/* Password Input */}
         <TextInput
@@ -155,6 +201,12 @@ const Register: React.FC<StackScreenProps<StackParamsList, 'Register'>> = ({ nav
           style={styles.input}
           theme={{ colors: { primary: theme.colors.primary } }}
         />
+
+          <HelperText type="error" visible={emailError ||(errorMessage === null)}>
+            {
+              (emailError)? 'invalid email format' : errorMessage && (errorMessage.reduce((currentValue, array)=> currentValue+array))
+            }
+          </HelperText>
 
         {/* Terms & Conditions Checkbox */}
         <View style={styles.checkboxContainer}>

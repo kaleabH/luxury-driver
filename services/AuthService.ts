@@ -9,6 +9,22 @@ export interface Credentials{
     deviceInfo: string;
 } 
 
+
+export interface RegisterInfo{
+    role: string;
+    deviceInfo: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    password: string;
+    countryCode: string;
+    city:string;
+}
+
+
+
+
 export const login = async (credentials: Credentials): Promise<void> =>{
     
         const { data } = await  axios.post('/login', credentials);
@@ -17,6 +33,15 @@ export const login = async (credentials: Credentials): Promise<void> =>{
 
         console.log('logged in !! ', await getToken())
 
+}
+
+export const register = async (registerInfo: RegisterInfo): Promise<void> =>{
+
+     const {data} = await axios.post('/register', registerInfo);
+     console.log('the registration data', data),
+     await setToken(data.token);
+
+     console.log('Registered !! ', await getToken())
 }
 
 

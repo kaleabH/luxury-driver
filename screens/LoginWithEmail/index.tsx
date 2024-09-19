@@ -13,7 +13,7 @@ const LoginWithEmail: React.FC<LoginWithEmailScreenProps> = ({ navigation }) => 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState<Array<string> | null>(null);
 
   const theme = {
     colors: {
@@ -32,18 +32,20 @@ const LoginWithEmail: React.FC<LoginWithEmailScreenProps> = ({ navigation }) => 
       email,
       password,
       deviceInfo
-    })
-     }catch(e){
-      // if(e.response ?. status === 422){
-        //  setErrorMessage(e.response.data.errors);
+    });
+    navigation.navigate('DrawerNavigator', {screen: 'Home'});
+
+     }catch(e: any){
+      // if(e?.response){
+      if(e?.response?.status === 422){
+         setErrorMessage(e.response.data.errors);
          console.log('login error', e)
-      // }
+      }
+    // }
      }
 
-     navigation.navigate('DrawerNavigator',{screen: 'Home'});
-     
-
   };
+
   const hasErrors = () => {
     return !email.includes('@');
   };
@@ -51,7 +53,7 @@ const LoginWithEmail: React.FC<LoginWithEmailScreenProps> = ({ navigation }) => 
   const handleForgotPassword = () => {
     // Navigate to Forgot Password Screen
     console.log('Forgot Password');
-    navigation.navigate('ForgotPassword'); // Adjust this if needed
+    // navigation.navigate('ForgotPassword'); // Adjust this if needed
   };
 
   useEffect(()=>{
@@ -95,6 +97,11 @@ const LoginWithEmail: React.FC<LoginWithEmailScreenProps> = ({ navigation }) => 
           style={styles.input}
           theme={{ colors: { primary: theme.colors.primary } }}
         />
+         <HelperText type="error" visible={emailError ||(errorMessage === null)}>
+            {
+              (emailError)? 'invalid email format' : errorMessage && (errorMessage.reduce((currentValue, array)=> currentValue+array))
+            }
+          </HelperText>
 
         {/* Forgot Password Link */}
         <TouchableOpacity onPress={handleForgotPassword}>
